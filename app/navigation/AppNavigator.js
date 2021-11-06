@@ -8,7 +8,7 @@ import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 const Tab = createBottomTabNavigator();
 
 function AppNavigator(props) {
-    const [selected, setSelected] = React.useState(1);
+
     return (
         <NavigationContainer>
             <Tab.Navigator>
@@ -21,7 +21,8 @@ function AppNavigator(props) {
                             name="home"
                             size={size}
                             color={color}
-                        />
+                        />,
+                        headerShown: false
                   }}
                    />
                 <Tab.Screen 
