@@ -12,16 +12,18 @@ import {
     NativeBaseProvider,
   } from "native-base"
 
-function FeaturedCategoryCard({category}) {
+function ProductCard({ product }) {
     return (
-        <Box
+        <>
+            <Box
             rounded="lg"
             overflow="hidden"
             borderColor="coolGray.100"
-            width="23%"
-            m="1%"
-            shadow={1}
+            width="45%"
             borderWidth="1"
+            m="2%"
+            shadow={1}
+            
             _dark={{
                 borderColor: "coolGray.600",
                 backgroundColor: "gray.700",
@@ -35,31 +37,40 @@ function FeaturedCategoryCard({category}) {
             }}
             >
             <Box>
-                <AspectRatio ratio={16 / 10}>
+                <AspectRatio ratio={16 / 16}>
                 <Image
                     source={{
-                    uri: category.image,
+                    uri: product.image_path,
                     }}
                     alt="image"
                 />
                 </AspectRatio>
             </Box>
-            <Stack p="2">
-                <Stack>
+            <Stack p="2" space={3}>
+                <Stack space={2} textAlign="center">
                 <Center>
-                <Heading size="xs">
-                <Text
-                    fontSize="xs"
-                    fontWeight="700"
+                <Heading size="xs" ml="-1">
+                    {product.name}
+                </Heading>
+                <Heading mt="3">
+                    <Text
+                        fontSize="lg"
+                        _light={{
+                        color: "warning.600",
+                        }}
+                        fontWeight="700"
+                        ml="-0.5"
+                        mt="-1"
                     >
-                    {category.name}
-                </Text>
+                        ৳{product.price}
+                    </Text>
                 </Heading>
                 </Center>
                 </Stack>
             </Stack>
         </Box>
+        </>
     );
 }
 
-export default FeaturedCategoryCard;
+export default ProductCard;
