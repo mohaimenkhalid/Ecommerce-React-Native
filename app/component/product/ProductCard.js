@@ -19,7 +19,7 @@ function ProductCard({ product }) {
             rounded="lg"
             overflow="hidden"
             borderColor="coolGray.100"
-            width="45%"
+            width="46%"
             borderWidth="1"
             m="2%"
             shadow={1}
