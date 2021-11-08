@@ -4,6 +4,13 @@ import { Text } from 'react-native'
 import {getCategoryAndProductByCategory} from "../api/request/product"
 import FeaturedCategoryCard from '../component/category/FeaturedCategoryCard';
 import { useNavigation } from '@react-navigation/native';
+import {
+    Spinner,
+    HStack,
+    Heading,
+    Center,
+    NativeBaseProvider,
+  } from "native-base"
 
 function CategoryProductScreen({route}) {
     const natigation = useNavigation();
@@ -37,8 +44,16 @@ function CategoryProductScreen({route}) {
 
     return (
         <View>
-            {loading ? <Text>Loading...</Text> :
-        
+            {loading ? 
+                <Center mt="8">
+                    <HStack space={2} alignItems="center">
+                        <Spinner accessibilityLabel="Loading posts" />
+                        <Heading color="primary.500" fontSize="lg">
+                            Loading...
+                        </Heading>
+                    </HStack>
+                </Center>
+            :
             <Flex
             direction="row"
             wrap="wrap"
