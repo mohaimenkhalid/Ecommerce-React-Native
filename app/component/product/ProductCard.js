@@ -16,12 +16,12 @@ function ProductCard({ product }) {
     return (
         <>
             <Box
-            rounded="lg"
+           
             overflow="hidden"
             borderColor="coolGray.100"
-            width="46%"
+            width="47.9%"
             borderWidth="1"
-            m="2%"
+            m="1"
             shadow={1}
             
             _dark={{

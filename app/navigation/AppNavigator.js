@@ -1,10 +1,11 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import HomeScreen from '../screens/HomeScreen';
+
 import AuthNavigator from './AuthNatigator';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import HomeNavigator from './HomeNatigator';
 
 
 const Tab = createBottomTabNavigator();
@@ -17,7 +18,7 @@ function AppNavigator(props) {
                 <Tab.Navigator>
                     <Tab.Screen 
                     name="Home"
-                    component={HomeScreen}
+                    component={HomeNavigator}
                     options={{
                         tabBarIcon: ({color, size}) => 
                         <MaterialCommunityIcons

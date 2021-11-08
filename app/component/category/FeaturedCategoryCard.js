@@ -10,16 +10,23 @@ import {
     Stack,
     Flex,
     NativeBaseProvider,
+    Pressable,
   } from "native-base"
 
-function FeaturedCategoryCard({category}) {
+function FeaturedCategoryCard({category, onPress}) {
+    
     return (
-        <Box
+        <Pressable 
+            width="23%"
+            m="1%"
+            onPress={onPress}
+        >
+            <Box
             rounded="lg"
             overflow="hidden"
             borderColor="coolGray.100"
-            width="23%"
-            m="1%"
+            width="100%"
+            height="120px"
             shadow={1}
             borderWidth="1"
             _dark={{
@@ -59,6 +66,7 @@ function FeaturedCategoryCard({category}) {
                 </Stack>
             </Stack>
         </Box>
+        </Pressable>
     );
 }
 
