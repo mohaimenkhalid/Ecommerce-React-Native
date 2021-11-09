@@ -9,17 +9,22 @@ import {
     HStack,
     Stack,
     Flex,
-    NativeBaseProvider,
-  } from "native-base"
+    NativeBaseProvider, Pressable,
+} from "native-base"
 
-function ProductCard({ product }) {
+function ProductCard({ product, onPress }) {
     return (
         <>
+            <Pressable
+                width="47.9%"
+                m="1%"
+                onPress={onPress}
+            >
             <Box
-           
             overflow="hidden"
             borderColor="coolGray.100"
-            width="47.9%"
+            width="100%"
+            minHeight="300"
             borderWidth="1"
             m="1"
             shadow={1}
@@ -69,6 +74,7 @@ function ProductCard({ product }) {
                 </Stack>
             </Stack>
         </Box>
+            </Pressable>
         </>
     );
 }

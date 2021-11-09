@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 
 function FeaturedcategoryList(props) {
     const [featuredCategory, setFeaturedCategory] = useState([])
-    const natigation = useNavigation();
+    const navigation = useNavigation();
 
     useEffect(() => {
         loadFeaturedCategory();
@@ -19,7 +19,7 @@ function FeaturedcategoryList(props) {
     }
 
     const detailsView = (category) => {
-        natigation.navigate("CategoryProduct", {slug: category.slug, title: category.name})
+        navigation.navigate("CategoryProduct", {slug: category.slug, title: category.name})
     }
     return (
         <View>

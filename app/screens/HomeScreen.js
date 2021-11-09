@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import FeaturedcategoryList from '../component/category/FeaturedcategoryList';
-import Screen from '../component/layout/Screen';
 import ProductByRemark from '../component/product/ProductByRemark';
 import AppBar from '../navigation/AppBar';
 import { Heading } from "native-base"
