@@ -1,6 +1,6 @@
 import { View, Flex } from 'native-base';
 import React, { useEffect, useState } from 'react';
-import { Text } from 'react-native'
+import {ScrollView} from 'react-native'
 import {getCategoryAndProductByCategory} from "../api/request/product"
 import FeaturedCategoryCard from '../component/category/FeaturedCategoryCard';
 import { useNavigation } from '@react-navigation/native';
@@ -11,6 +11,7 @@ import {
     Center,
     NativeBaseProvider,
   } from "native-base"
+import ProductCard from "../component/product/ProductCard";
 
 function CategoryProductScreen({route}) {
     const natigation = useNavigation();
@@ -43,7 +44,7 @@ function CategoryProductScreen({route}) {
     }
 
     return (
-        <View>
+        <ScrollView>
             {loading ? 
                 <Center mt="8">
                     <HStack space={2} alignItems="center">
@@ -63,8 +64,8 @@ function CategoryProductScreen({route}) {
           >
             {
                 products.length !== 0 ? 
-                    products.map((category, index) => {
-                        return <Text>Product List</Text>
+                    products.map((product, index) => {
+                        return <ProductCard product={product} key={index} />
                     }) 
                     :
                     categories.map((category, index) => {
@@ -77,7 +78,7 @@ function CategoryProductScreen({route}) {
             }
             </Flex>
 }
-        </View>
+        </ScrollView>
     );
 }
 
