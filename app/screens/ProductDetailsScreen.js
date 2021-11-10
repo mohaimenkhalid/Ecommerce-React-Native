@@ -3,7 +3,6 @@ import {Image, ScrollView, Text, View, AspectRatio, Box, Button} from "native-ba
 import {getProductDetails} from "../api/request/product";
 import Heading from "native-base/src/components/primitives/Heading/index";
 import {StyleSheet} from "react-native";
-import {flex} from "styled-system";
 
 const ProductDetailsScreen = ({route}) => {
     const [product, setProduct] = useState('');
@@ -40,20 +39,21 @@ const ProductDetailsScreen = ({route}) => {
                             <View shadow={2}
                               style={styles.productDetailsCard}
                             >
+                                <View style={styles.gridContainer}>
+                                    <Text style={styles.categoryBadge}>{product.category && product.category.name}</Text>
+                                </View>
+
                                 <Heading py="5" size="md">
                                     {product.name}
                                 </Heading>
                                 <View>
-                                    <Text>{product.category && product.category.name}</Text>
-                                </View>
-                                <View>
                                     {
                                         product.special_price ?
                                             <>
-                                                <Text>Tk. {product.price}</Text>
-                                                <View>
-                                                    <Text>Tk. {product.special_price}</Text>
-                                                    <Text> You Save TK. { product.price - product.special_price}</Text>
+                                                <Text fontSize="xl" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}}>Tk. {product.price}</Text>
+                                                <View style={styles.gridContainer}>
+                                                    <Text fontSize="3xl" color="danger.600" fontWeight="700">৳{product.special_price}</Text>
+                                                    <Text > You Save ৳ { product.price - product.special_price}</Text>
                                                 </View>
                                             </>
                                              :
@@ -71,7 +71,6 @@ const ProductDetailsScreen = ({route}) => {
                         </View>
                     </>
             }
-
         </ScrollView>
     );
 };
@@ -79,12 +78,22 @@ const ProductDetailsScreen = ({route}) => {
 const styles = StyleSheet.create({
     productDetailsCard: {
         backgroundColor: "#fff",
-        padding: 10,
+        padding: 30,
         borderRadius: 10
     },
     categoryBadge: {
-        backgroundColor: "#fdf2f8",
-        padding: 10
+        fontSize: 14,
+        fontWeight: "700",
+        color: "coral",
+        backgroundColor: "oldlace",
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        borderRadius: 20
+    },
+    gridContainer: {
+        flex: 1,
+        flexDirection: "row",
+        flexWrap: "wrap",
     }
 })
 
