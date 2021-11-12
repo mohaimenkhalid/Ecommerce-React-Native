@@ -4,6 +4,7 @@ import {getProductDetails} from "../api/request/product";
 import Heading from "native-base/src/components/primitives/Heading/index";
 import {StyleSheet, Pressable} from "react-native";
 import Modal from "react-native-modal";
+import {MaterialCommunityIcons} from "@expo/vector-icons";
 
 const ProductDetailsScreen = ({route}) => {
     const [product, setProduct] = useState('');
@@ -52,16 +53,22 @@ const ProductDetailsScreen = ({route}) => {
                                     </View>
                                     <Pressable
                                         onPress={toggleModal}
-                                        onSwipeComplete={() => setModalVisible(false)}
-                                        swipeDirection="left"
                                     >
                                         <Text style={styles.addToCartButton}>Add To Cart</Text>
                                     </Pressable>
                                     <Modal isVisible={isModalVisible} style={{ margin: 0 }}>
                                         <View style={styles.cardModalPanel}>
-                                            <Text>Hello!</Text>
+                                            <View style={styles.closeBtn}>
+                                                <Pressable
+                                                    onPress={toggleModal}
+                                                >
+                                                    <MaterialCommunityIcons
+                                                        name='close'
+                                                        size={30}
+                                                    />
+                                                </Pressable>
 
-                                            <Button title="Hide modal" onPress={toggleModal} />
+                                            </View>
                                         </View>
                                     </Modal>
                                 </View>
@@ -135,9 +142,16 @@ const styles = StyleSheet.create({
         flex: 1,
         position: "absolute",
         bottom: 0,
-        backgroundColor: "red",
+        backgroundColor: "#fff",
         width: "100%",
-        margin: 0
+        margin: 0,
+        height: "60%",
+        borderRadius: 10
+    },
+    closeBtn: {
+        position: "absolute",
+        top: 5,
+        right: 0
     }
 })
 
