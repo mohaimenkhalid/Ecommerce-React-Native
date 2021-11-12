@@ -58,16 +58,25 @@ const ProductDetailsScreen = ({route}) => {
                                     </Pressable>
                                     <Modal isVisible={isModalVisible} style={{ margin: 0 }}>
                                         <View style={styles.cardModalPanel}>
-                                            <View style={styles.closeBtn}>
-                                                <Pressable
-                                                    onPress={toggleModal}
-                                                >
-                                                    <MaterialCommunityIcons
-                                                        name='close'
-                                                        size={30}
-                                                    />
-                                                </Pressable>
-
+                                            <View style={styles.cardHeader}>
+                                                <View style={styles.closeBtn}>
+                                                    <Pressable
+                                                        onPress={toggleModal}
+                                                    >
+                                                        <MaterialCommunityIcons
+                                                            name='close'
+                                                            size={30}
+                                                        />
+                                                    </Pressable>
+                                                </View>
+                                            </View>
+                                            <View style={styles.cardBody}>
+                                                <Image
+                                                    source={{
+                                                        uri: product.image_path
+                                                    }}
+                                                    alt="image"
+                                                />
                                             </View>
                                         </View>
                                     </Modal>
@@ -148,10 +157,22 @@ const styles = StyleSheet.create({
         height: "60%",
         borderRadius: 10
     },
+    cardHead: {
+        flex: 1,
+        height: 10,
+        backgroundColor: "red"
+    },
     closeBtn: {
         position: "absolute",
         top: 5,
         right: 0
+    },
+    cardBody: {
+        flex: 1,
+        position: "relative",
+        height: "100%",
+        width: "100%",
+        marginVertical: 10
     }
 })
 
