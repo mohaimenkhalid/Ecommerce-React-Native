@@ -57,7 +57,7 @@ const ProductDetailsScreen = ({route}) => {
                                         <Text style={styles.addToCartButton}>Add To Cart</Text>
                                     </Pressable>
                                     <Modal isVisible={isModalVisible} style={{ margin: 0 }}>
-                                        <View style={styles.cardModalPanel}>
+                                        <ScrollView style={styles.cardModalPanel}>
                                             <View style={styles.cardHeader}>
                                                 <View style={styles.closeBtn}>
                                                     <Pressable
@@ -71,13 +71,69 @@ const ProductDetailsScreen = ({route}) => {
                                                 </View>
                                             </View>
                                             <View style={styles.cardBody}>
-                                                <Image
-                                                    source={{
-                                                        uri: product.image_path
-                                                    }}
-                                                    alt="image"
-                                                />
+                                                <View style={styles.ImageContainer}>
+                                                    <Image
+                                                        style={{height: "100%", width: 150}}
+                                                        source={{
+                                                            uri: product.image_path
+                                                        }}
+                                                        alt="image"
+                                                    />
+                                                    <View style={{marginVertical: 30}}>
+                                                        <Heading>{product.name}</Heading>
+                                                        <Heading>৳{product.special_price}</Heading>
+                                                    </View>
+                                                </View>
+                                                <View style={styles.quantityContainer}>
+                                                    <Text>Quantity</Text>
+                                                    <View style={styles.quantityHandlerWrapper}>
+                                                        <Pressable>
+                                                            <MaterialCommunityIcons
+                                                                name='minus'
+                                                                size={20}
+                                                                style={{
+                                                                    borderWidth: 1,
+                                                                    borderColor: "#d1d1d1",
+                                                                    paddingVertical: 2,
+                                                                    paddingHorizontal: 8,
+                                                                }}
+                                                                color="#999797"
+                                                            />
+                                                        </Pressable>
+                                                        <View style={{
+                                                            borderWidth: 1,
+                                                            borderColor: "#d1d1d1",
+                                                            paddingVertical: 2,
+                                                            paddingHorizontal: 8,
+                                                        }}>
+                                                            <Text>20</Text>
+                                                        </View>
+                                                        <Pressable>
+                                                            <MaterialCommunityIcons
+                                                                name='plus'
+                                                                size={20}
+                                                                style={{
+                                                                    borderWidth: 1,
+                                                                    borderColor: "#d1d1d1",
+                                                                    paddingVertical: 2,
+                                                                    paddingHorizontal: 8
+                                                                }}
+                                                                color="#999797"
+                                                            />
+                                                        </Pressable>
+                                                    </View>
+                                                </View>
                                             </View>
+                                        </ScrollView>
+                                        <View style={{
+                                            position: "absolute",
+                                            flex: 1,
+                                            width: "100%",
+                                            bottom: 0
+                                        }}>
+                                            <Button size="md" style={{backgroundColor: "red"}} onPress={() => console.log("adad")}>
+                                                Add To Cart
+                                            </Button>
                                         </View>
                                     </Modal>
                                 </View>
@@ -159,20 +215,32 @@ const styles = StyleSheet.create({
     },
     cardHead: {
         flex: 1,
-        height: 10,
+        height: 50,
         backgroundColor: "red"
     },
     closeBtn: {
-        position: "absolute",
         top: 5,
         right: 0
     },
     cardBody: {
         flex: 1,
-        position: "relative",
-        height: "100%",
-        width: "100%",
-        marginVertical: 10
+        marginVertical: 10,
+    },
+    ImageContainer: {
+        flex: 1,
+        height: 200,
+        flexDirection: "row",
+        alignContent: "flex-start",
+
+    },
+    quantityContainer: {
+        flex: 1,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        padding: 20
+    },
+    quantityHandlerWrapper: {
+        flexDirection: "row",
     }
 })
 
