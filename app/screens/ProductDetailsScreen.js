@@ -5,12 +5,16 @@ import Heading from "native-base/src/components/primitives/Heading/index";
 import {StyleSheet, Pressable} from "react-native";
 import Modal from "react-native-modal";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/actions/cartActions";
+
 
 const ProductDetailsScreen = ({route}) => {
     const [product, setProduct] = useState('');
     const [loading, setLoading] = useState(false);
     const [isModalVisible, setModalVisible] = useState(false);
-
+    const [quantity, setQuantity] = useState(1);
+    const dispatch = useDispatch();
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
@@ -25,8 +29,20 @@ const ProductDetailsScreen = ({route}) => {
         const response = await getProductDetails(slug)
         setProduct(response.data)
         setLoading(false)
-        console.log(response.data)
     }
+
+    const addToCartSet = () => {
+        let products = {
+            'product_id' : product.id,
+            'name' : product.name,
+            'image' : product.image,
+            'price' : product.price,
+            'quantity' : quantity,
+            'subtotal' : product.price * quantity,
+            'description' : product.product_details ? product.product_details.short_description : '',
+        }
+        dispatch(addToCart(products));
+    };
     return (
         <ScrollView>
             {
@@ -87,7 +103,9 @@ const ProductDetailsScreen = ({route}) => {
                                                 <View style={styles.quantityContainer}>
                                                     <Text>Quantity</Text>
                                                     <View style={styles.quantityHandlerWrapper}>
-                                                        <Pressable>
+                                                        <Pressable
+                                                            onPress={() => quantity > 1 && setQuantity(quantity - 1)}
+                                                        >
                                                             <MaterialCommunityIcons
                                                                 name='minus'
                                                                 size={20}
@@ -106,9 +124,11 @@ const ProductDetailsScreen = ({route}) => {
                                                             paddingVertical: 2,
                                                             paddingHorizontal: 8,
                                                         }}>
-                                                            <Text>20</Text>
+                                                            <Text>{quantity}</Text>
                                                         </View>
-                                                        <Pressable>
+                                                        <Pressable
+                                                            onPress={() => setQuantity(quantity + 1)}
+                                                        >
                                                             <MaterialCommunityIcons
                                                                 name='plus'
                                                                 size={20}
@@ -131,7 +151,7 @@ const ProductDetailsScreen = ({route}) => {
                                             width: "100%",
                                             bottom: 0
                                         }}>
-                                            <Button size="md" style={{backgroundColor: "red"}} onPress={() => console.log("adad")}>
+                                            <Button size="md" style={{backgroundColor: "red"}} onPress={() => addToCartSet()}>
                                                 Add To Cart
                                             </Button>
                                         </View>
@@ -220,7 +240,8 @@ const styles = StyleSheet.create({
     },
     closeBtn: {
         top: 5,
-        right: 0
+        right: 5,
+        position: "absolute"
     },
     cardBody: {
         flex: 1,
@@ -237,8 +258,11 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         justifyContent: "space-between",
-        padding: 20
+        padding: 15,
+        borderWidth: 1,
+        borderColor: "#ddd"
     },
+
     quantityHandlerWrapper: {
         flexDirection: "row",
     }
