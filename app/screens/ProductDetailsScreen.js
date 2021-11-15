@@ -7,9 +7,11 @@ import Modal from "react-native-modal";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/actions/cartActions";
+import {useToast} from "native-base"
 
 
 const ProductDetailsScreen = ({route}) => {
+    const toast = useToast()
     const [product, setProduct] = useState('');
     const [loading, setLoading] = useState(false);
     const [isModalVisible, setModalVisible] = useState(false);
@@ -41,7 +43,14 @@ const ProductDetailsScreen = ({route}) => {
             'subtotal' : product.price * quantity,
             'description' : product.product_details ? product.product_details.short_description : '',
         }
-        dispatch(addToCart(products));
+        dispatch(addToCart(products))
+            .then(res =>
+                toast.show({
+                    title: "Product added your cart successfully",
+                    status: "success",
+                    placement: "top",
+                })
+            );
     };
     return (
         <ScrollView>

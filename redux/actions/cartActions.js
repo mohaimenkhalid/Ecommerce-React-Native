@@ -1,28 +1,31 @@
 import {store} from "../../store/store";
 import {cartSlice} from "../slices/cartSlice";
 import AppStorage from "../../storage/AppStorage";
+import { success } from "../../app/component/ToastComponent"
 
 const {actions: cartSlices} = cartSlice;
 
-
 export const addToCart = (product) => async (dispatch) => {
-    let cart = await AppStorage.getCart();
-    let dataCart = cart !== null ? cart : [];
-    let findCartItem = dataCart.find((p) => p.product_id === product.product_id);
-    if (dataCart.length === 0 || !findCartItem) {
-        dataCart.push(product)
-    } else if (findCartItem) {
-        product.subtotal += findCartItem.subtotal
-        product.quantity += findCartItem.quantity
-        dataCart.splice(
-            dataCart.findIndex((p) => p.product_id === product.product_id),
-            1,
-            product
-        )
-    }
-    AppStorage.setCartItem(dataCart)
-    dispatch(getCartAction());
-    console.log("Product added your cart successfully!")
+    return await new Promise(async (resolve, reject) => {
+        let cart = await AppStorage.getCart();
+        let dataCart = cart !== null ? cart : [];
+        let findCartItem = dataCart.find((p) => p.product_id === product.product_id);
+        if (dataCart.length === 0 || !findCartItem) {
+            dataCart.push(product)
+        } else if (findCartItem) {
+            product.subtotal += findCartItem.subtotal
+            product.quantity += findCartItem.quantity
+            dataCart.splice(
+                dataCart.findIndex((p) => p.product_id === product.product_id),
+                1,
+                product
+            )
+        }
+        AppStorage.setCartItem(dataCart)
+        dispatch(getCartAction());
+        resolve('success', true);
+        console.log("Product added your cart successfully!")
+    })
 }
 
 export const getCartAction = () => async (dispatch) => {
