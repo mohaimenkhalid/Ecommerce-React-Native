@@ -1,7 +1,6 @@
 import {store} from "../../store/store";
 import {cartSlice} from "../slices/cartSlice";
 import AppStorage from "../../storage/AppStorage";
-import { success } from "../../app/component/ToastComponent"
 
 const {actions: cartSlices} = cartSlice;
 
@@ -24,7 +23,6 @@ export const addToCart = (product) => async (dispatch) => {
         AppStorage.setCartItem(dataCart)
         dispatch(getCartAction());
         resolve('success', true);
-        console.log("Product added your cart successfully!")
     })
 }
 

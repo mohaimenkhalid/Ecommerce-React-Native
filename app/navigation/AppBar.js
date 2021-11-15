@@ -2,9 +2,12 @@ import React from "react";
 import { HStack, IconButton, Icon, Text, Box, StatusBar, Badge, View } from "native-base";
 import { MaterialIcons } from '@expo/vector-icons';
 import {useSelector} from "react-redux";
+import { useNavigation } from '@react-navigation/native';
 
 function AppBar({pageTitle}){
+    const navigation = useNavigation();
     const cart = useSelector(state => state.cart.items)
+
   return (
     <>
         <StatusBar backgroundColor="#3700B3" barStyle="light-content" />
@@ -20,6 +23,7 @@ function AppBar({pageTitle}){
             <IconButton icon={<Icon as={<MaterialIcons name='favorite' />} size='sm' color="white" />} />
               <IconButton icon={<Icon as={<MaterialIcons name='shopping-cart' />}
                                       size='sm' color="white" />}
+                onPress={() => navigation.navigate("CartDetails")}
               />
               <View rounded="full" style={{
                   justifyContent: "center",
@@ -32,7 +36,6 @@ function AppBar({pageTitle}){
                   position: "absolute",
                   left: 73,
                   top: -5
-
               }}>
                   <Text style={{color: "white"}}>{cart.length}</Text>
               </View>
