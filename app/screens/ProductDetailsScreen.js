@@ -38,6 +38,7 @@ const ProductDetailsScreen = ({route}) => {
             'product_id' : product.id,
             'name' : product.name,
             'image' : product.image,
+            'image_path' : product.image_path,
             'price' : product.price,
             'quantity' : quantity,
             'subtotal' : product.price * quantity,

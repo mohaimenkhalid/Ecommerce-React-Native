@@ -28,12 +28,17 @@ const getUser = async () => {
 
 const getCart = async () => {
     let cart = await SecureStore.getItemAsync('cart');
+    console.log(JSON.parse(cart))
     return  JSON.parse(cart);
 }
 
 const setCartItem = async (dataCart) => {
     await SecureStore.setItemAsync('cart', JSON.stringify(dataCart))
 }
+const clearCart = async () => {
+    await SecureStore.deleteItemAsync('cart');
+}
+
 
 export default {
     store,
@@ -41,6 +46,7 @@ export default {
     getToken,
     getUser,
     getCart,
-    setCartItem
+    setCartItem,
+    clearCart
 }
 

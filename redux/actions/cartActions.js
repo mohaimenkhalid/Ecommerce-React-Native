@@ -31,9 +31,9 @@ export const getCartAction = () => async (dispatch) => {
     dispatch(cartSlices.setCart(cart))
 }
 
-export const updateCartAction = (productId, type) => {
-    let cart = AppStorage.getCart();
-    var dataCart = cart !== null ? JSON.parse(cart) : [];
+export const updateCartAction = (productId, type) => async (dispatch) => {
+    let cart = await AppStorage.getCart();
+    var dataCart = cart !== null ? cart : [];
 
     let findCartItem = dataCart.find((p) => p.product_id === productId)
     if (type === 'increment') {
@@ -52,7 +52,7 @@ export const updateCartAction = (productId, type) => {
         dataCart[cartIndex].subtotal = findCartItem.subtotal;
     }
     AppStorage.setCartItem(dataCart)
-    store.dispatch(() => getCartAction());
+    dispatch(getCartAction());
 }
 
 export const cartProductDelete = (productId) => {

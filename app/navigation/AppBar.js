@@ -1,12 +1,18 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { HStack, IconButton, Icon, Text, Box, StatusBar, Badge, View } from "native-base";
 import { MaterialIcons } from '@expo/vector-icons';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { useNavigation } from '@react-navigation/native';
+import {getCartAction} from "../../redux/actions/cartActions";
 
 function AppBar({pageTitle}){
     const navigation = useNavigation();
+    const dispatch = useDispatch();
     const cart = useSelector(state => state.cart.items)
+
+    useEffect(() => {
+        dispatch(getCartAction())
+    }, [])
 
   return (
     <>
