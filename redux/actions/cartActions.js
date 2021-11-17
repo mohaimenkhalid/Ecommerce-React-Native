@@ -55,19 +55,20 @@ export const updateCartAction = (productId, type) => async (dispatch) => {
     dispatch(getCartAction());
 }
 
-export const cartProductDelete = (productId) => {
-    let cart = JSON.parse(AppStorage.getCart());
-    let findCartItem = cart.find((p) => p.product_id === productId)
-    if (cart && findCartItem) {
-        let cartIndex = cart.findIndex((p) => p.product_id === productId);
-        cart.splice(cartIndex, 1)
-        AppStorage.setCartItem(cart)
-        store.dispatch(() => getCartAction());
-        console.log("Product removed from Cart!")
-    } else {
-        console.log("Something went wrong!")
-    }
-
+export const cartProductDelete = (productId) => async(dispatch) => {
+    return await new Promise(async(resolve, reject) => {
+        let cart = await AppStorage.getCart();
+        let findCartItem = cart.find((p) => p.product_id === productId)
+        if (cart && findCartItem) {
+            let cartIndex = cart.findIndex((p) => p.product_id === productId);
+            cart.splice(cartIndex, 1)
+            AppStorage.setCartItem(cart)
+            dispatch(getCartAction());
+            resolve({status: true})
+        } else {
+            resolve({status: false})
+        }
+    })
 }
 
 export const setCollapseAction = (response) => {
