@@ -18,6 +18,9 @@ const CartScreen = () => {
         console.log(productId, type)
         dispatch(updateCartAction(productId, type))
     };
+    const checkoutProcess = () => {
+        navigation.navigate("CheckoutPage")
+    }
     return (
         <>
             <ScrollView style={styles.container}>
@@ -122,7 +125,11 @@ const CartScreen = () => {
                     })
                 }
             </ScrollView>
-            { cart.length > 0 && <Button style={styles.checkoutButton} p="4" size="lg" onPress={() => console.log("Checkout press")}>
+            { cart.length > 0 &&
+                <Button style={styles.checkoutButton}
+                        p="4" size="lg"
+                        onPress={() => checkoutProcess()}
+                >
                 Checkout
             </Button>
 

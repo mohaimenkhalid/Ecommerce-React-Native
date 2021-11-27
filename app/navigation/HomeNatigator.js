@@ -4,6 +4,7 @@ import HomeScreen from '../screens/HomeScreen';
 import CategoryProductScreen from '../screens/CategoryProductScreen';
 import ProductDetailsScreen from "../screens/ProductDetailsScreen";
 import CartScreen from "../screens/CartScreen";
+import CheckoutScreen from "../screens/CheckoutScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -26,6 +27,12 @@ const HomeNavigator = () => (
             name="CartDetails"
             component={CartScreen}
             options={{title: "Cart Details"}}
+        />
+
+        <Stack.Screen
+            name="CheckoutPage"
+            component={CheckoutScreen}
+            options={{title: "Checkout"}}
         />
     </Stack.Navigator>
 );
